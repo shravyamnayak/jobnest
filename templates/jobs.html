@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Available Jobs</h2>
+
+{% if jobs %}
+    {% for job in jobs %}
+        <div class="job-card">
+
+            <div class="job-header">
+                <h3>{{ job.title }}</h3>
+                <span class="tag highlight">New</span>
+            </div>
+
+            <p class="job-desc">
+                {{ job.description }}
+            </p>
+
+            <div class="job-meta">
+                <span class="tag">{{ job.location }}</span>
+                <span class="tag">Full Time</span>
+            </div>
+
+            {% if session.get('role') == 'job_seeker' %}
+                <div class="job-actions">
+                    <a href="/apply/{{ job.id }}" class="primary-link">
+                        Apply Now
+                    </a>
+                </div>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="empty-text">
+        No jobs available right now.
+    </p>
+{% endif %}
+
+{% endblock %}

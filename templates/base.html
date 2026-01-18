@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JobNest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+    <div class="container nav-flex">
+
+        <div class="brand">
+            <span class="logo-dot"></span>
+            <span class="brand-name">JobNest</span>
+        </div>
+
+        <div class="nav-links">
+            {% if session.get('user_id') %}
+
+                <a href="/jobs">Jobs</a>
+
+                {% if session.get('role') == 'job_seeker' %}
+                    <a href="/my-applications">My Applications</a>
+                {% endif %}
+
+                {% if session.get('role') == 'recruiter' %}
+                    <a href="/recruiter/jobs">Dashboard</a>
+                    <a href="/post-job" class="primary-link">Post Job</a>
+                {% endif %}
+
+                <a href="/logout">Logout</a>
+
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register" class="primary-link">Get Started</a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= FLASH MESSAGES ================= -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ================= PAGE CONTENT ================= -->
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- ================= AUTO-DISMISS FLASH ================= -->
+<script>
+  setTimeout(function () {
+    const flashes = document.querySelectorAll('.flash');
+    flashes.forEach(function (flash) {
+      flash.style.display = 'none';
+    });
+  }, 3000);
+</script>
+
+</body>
+</html>

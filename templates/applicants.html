@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Applicants for "{{ job.title }}"</h2>
+
+{% if applicants %}
+    {% for a in applicants %}
+        <div class="job-card">
+            <h3>{{ a.name }}</h3>
+            <p>{{ a.email }}</p>
+            <p class="muted">Applied on {{ a.applied_at }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="empty-text">No applicants yet.</p>
+{% endif %}
+
+{% endblock %}

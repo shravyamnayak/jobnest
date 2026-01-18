@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Your Posted Jobs</h2>
+
+{% if jobs %}
+    {% for job in jobs %}
+        <div class="job-card">
+            <h3>{{ job.title }}</h3>
+            <p class="muted">Posted on {{ job.created_at }}</p>
+
+            <a href="/recruiter/jobs/{{ job.id }}/applicants"
+               class="primary-link">
+                View Applicants
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="empty-text">You haven’t posted any jobs yet.</p>
+{% endif %}
+
+{% endblock %}
