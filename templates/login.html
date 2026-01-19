@@ -1,14 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Login</h2>
-
 <div class="form-box">
-<form action="/login" method="POST">
-    <input name="email" type="email" placeholder="Email" required>
-    <input name="password" type="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
+
+    <h2 style="margin-bottom:8px">Login</h2>
+    <p class="muted" style="margin-bottom:24px">
+        Welcome back to JobNest
+    </p>
+
+    <!-- NORMAL LOGIN -->
+    <form action="/login" method="POST">
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="password" type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- DIVIDER -->
+    <div style="text-align:center; margin:20px 0; color:#6b7280;">
+        — OR —
+    </div>
+
+    <!-- GOOGLE LOGIN -->
+    <a href="/login/google" class="google-btn">
+        Continue with Google
+    </a>
+
+    <!-- REGISTER LINK -->
+    <p class="muted" style="text-align:center; margin-top:18px">
+        Don’t have an account?
+        <a href="/register">Create one</a>
+    </p>
+
 </div>
 
 {% endblock %}
